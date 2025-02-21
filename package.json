@@ -1,0 +1,16 @@
+{
+  "name": "airtable-extension-sdk-colors",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.js"
+  },
+  "author": "Kevin Miller <kevin@kevee.net>",
+  "license": "ISC",
+  "dependencies": {
+    "@airtable/blocks": "^1.18.2",
+    "@airtable/blocks-testing": "^0.0.6"
+  }
+}
