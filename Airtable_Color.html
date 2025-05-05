@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airtable Color Palette</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            text-align: center;
+
+        }
+        #colorTable {
+            min-width: 90%;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        th, td {
+            padding: 2px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 12px; 
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .color-swatch {
+            display: block;
+            height: auto;  
+            min-width: 10%;
+            min-height: 12px;
+            padding: 5px 5px; 
+            margin-bottom: 2px; 
+            border-radius: 15px;
+            text-align: center;
+            color: rgba(255, 255, 255, 1);
+            font-size: 12px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+        }
+        .rgb-value {
+            display: block;
+            font-size: 12px; 
+        }
+        .hex-value {
+            display: block;
+            font-size: 12px; 
+            text-transform: uppercase;
+        }
+        .color-name {
+            display: block;
+            font-size: 12px;
+        }
+
+        .toggle-switch-container {
+            display: inline-flex;
+            margin-right: 20px;
+            align-items: center; 
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+            margin-right: 8px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 20px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+        body.hide-table-headers thead {
+            display: none;
+        }
+        body.hide-table-headers tbody td:first-child {
+            display: none;
+        }
+        body.hide-color-names .color-name {
+            display: none;
+        }
+    </style>
+</head>
+<body class="show-hex hide-table-headers hide-color-names hide-rgb"> 
+
+<h1>Airtable Color Palette</h1>
+
+<div style="margin-bottom: 15px; font-size: 14px;">
+    <div class="toggle-switch-container">
+        <label class="switch">
+            <input type="checkbox" id="toggleHex" checked>
+            <span class="slider"></span>
+        </label> <span class="toggle-label">Hex</span>
+    </div>
+    <div class="toggle-switch-container">
+        <label class="switch">
+            <input type="checkbox" id="toggleRgb">
+            <span class="slider"></span>
+        </label> <span class="toggle-label">RGB</span>
+    </div>
+    <div class="toggle-switch-container">
+        <label class="switch">
+            <input type="checkbox" id="toggleColorNames">
+            <span class="slider"></span>
+        </label> <span class="toggle-label">Names</span>
+    </div>
+    <div class="toggle-switch-container">
+        <label class="switch">
+            <input type="checkbox" id="toggleTableHeaders"> <!-- Unchecked by default -->
+            <span class="slider"></span>
+        </label> <span class="toggle-label">Headers</span>
+    </div>
+</div>
+
+<!-- CSS rules for hiding elements -->
+<style>
+    body:not(.show-hex) .hex-value { display: none; }
+    body:not(.show-rgb) .rgb-value { display: none; }
+</style>
+
+<table id="colorTable">
+    <thead>
+        <tr>
+            <th>Hue</th>
+            <th>
+                <div class="color-swatch" style="background-color: #1283da;"><span class="color-name">Blue</span><span class="hex-value">#1283da</span><span class="rgb-value">rgb(18, 131, 218)</span></div>
+            </th>
+            <th>
+                <div class="color-swatch" style="background-color: #01a9db;"><span class="color-name">Cyan</span><span class="hex-value">#01a9db</span><span class="rgb-value">rgb(1, 169, 219)</span></div>
+            </th>
+            <th>
+                <div class="color-swatch" style="background-color: #02aaa4;"><span class="color-name">Teal</span><span class="hex-value">#02aaa4</span><span class="rgb-value">rgb(2, 170, 164)</span></div>
+            </th>
+            <th>
+                <div class="color-swatch" style="background-color: #11af22;"><span class="color-name">Green</span><span class="hex-value">#11af22</span><span class="rgb-value">rgb(17, 175, 34)</span></div>
+            </th>
+            <th>
+                <div class="color-swatch" style="background-color: #e08d00;"><span class="color-name">Yellow</span><span class="hex-value">#e08d00</span><span class="rgb-value">rgb(224, 141, 0)</span></div>
+            </th>
+            <th>
+                <div class="color-swatch" style="background-color: #f7653b;"><span class="color-name">Orange</span><span class="hex-value">#f7653b</span><span class="rgb-value">rgb(247, 101, 59)</span></div>
+            </th>
+            <th>
+                <div class="color-swatch" style="background-color: #ef3061;"><span class="color-name">Red</span><span class="hex-value">#ef3061</span><span class="rgb-value">rgb(239, 48, 97)</span></div>
+            </th>
+            <th>
+                <div class="color-swatch" style="background-color: #e929ba;"><span class="color-name">Pink</span><span class="hex-value">#e929ba</span><span class="rgb-value">rgb(233, 41, 186)</span></div>
+            </th>
+            <th>
+                <div class="color-swatch" style="background-color: #7c39ed;"><span class="color-name">Purple</span><span class="hex-value">#7c39ed</span><span class="rgb-value">rgb(124, 57, 237)</span></div>
+            </th>
+            <th>
+                <div class="color-swatch" style="background-color: #666666;"><span class="color-name">Gray</span><span class="hex-value">#666666</span><span class="rgb-value">rgb(102, 102, 102)</span></div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Light 2 Row -->
+        <tr>
+            <td>Light 2</td>
+            <td>
+                <div class="color-swatch" style="background-color: #cfdfff;"><span class="color-name">blueLight2</span><span class="hex-value">#cfdfff</span><span class="rgb-value">rgb(207, 223, 255)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #d0f0fd;"><span class="color-name">cyanLight2</span><span class="hex-value">#d0f0fd</span><span class="rgb-value">rgb(208, 240, 253)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #c2f5e9;"><span class="color-name">tealLight2</span><span class="hex-value">#c2f5e9</span><span class="rgb-value">rgb(194, 245, 233)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #d1f7c4;"><span class="color-name">greenLight2</span><span class="hex-value">#d1f7c4</span><span class="rgb-value">rgb(209, 247, 196)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #ffeab6;"><span class="color-name">yellowLight2</span><span class="hex-value">#ffeab6</span><span class="rgb-value">rgb(255, 234, 182)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #fee2d5;"><span class="color-name">orangeLight2</span><span class="hex-value">#fee2d5</span><span class="rgb-value">rgb(254, 226, 213)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #ffdce5;"><span class="color-name">redLight2</span><span class="hex-value">#ffdce5</span><span class="rgb-value">rgb(255, 220, 229)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #ffdaf6;"><span class="color-name">pinkLight2</span><span class="hex-value">#ffdaf6</span><span class="rgb-value">rgb(255, 218, 246)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #ede2fe;"><span class="color-name">purpleLight2</span><span class="hex-value">#ede2fe</span><span class="rgb-value">rgb(237, 226, 254)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #eeeeee;"><span class="color-name">grayLight2</span><span class="hex-value">#eeeeee</span><span class="rgb-value">rgb(238, 238, 238)</span></div>
+            </td>
+        </tr>
+        <!-- Light 1 Row -->
+        <tr>
+            <td>Light 1</td>
+            <td>
+                <div class="color-swatch" style="background-color: #9cc7ff;"><span class="color-name">blueLight1</span><span class="hex-value">#9cc7ff</span><span class="rgb-value">rgb(156, 199, 255)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #77d1f3;"><span class="color-name">cyanLight1</span><span class="hex-value">#77d1f3</span><span class="rgb-value">rgb(119, 209, 243)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #72ddc3;"><span class="color-name">tealLight1</span><span class="hex-value">#72ddc3</span><span class="rgb-value">rgb(114, 221, 195)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #93e088;"><span class="color-name">greenLight1</span><span class="hex-value">#93e088</span><span class="rgb-value">rgb(147, 224, 136)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #ffd66e;"><span class="color-name">yellowLight1</span><span class="hex-value">#ffd66e</span><span class="rgb-value">rgb(255, 214, 110)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #ffa981;"><span class="color-name">orangeLight1</span><span class="hex-value">#ffa981</span><span class="rgb-value">rgb(255, 169, 129)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #ff9eb7;"><span class="color-name">redLight1</span><span class="hex-value">#ff9eb7</span><span class="rgb-value">rgb(255, 158, 183)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #f99de2;"><span class="color-name">pinkLight1</span><span class="hex-value">#f99de2</span><span class="rgb-value">rgb(249, 157, 226)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #cdb0ff;"><span class="color-name">purpleLight1</span><span class="hex-value">#cdb0ff</span><span class="rgb-value">rgb(205, 176, 255)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #cccccc;"><span class="color-name">grayLight1</span><span class="hex-value">#cccccc</span><span class="rgb-value">rgb(204, 204, 204)</span></div>
+            </td>
+        </tr>
+        <!-- Bright Row -->
+        <tr>
+            <td>Bright</td>
+            <td>
+                <div class="color-swatch" style="background-color: #2d7ff9;"><span class="color-name">blueBright</span><span class="hex-value">#2d7ff9</span><span class="rgb-value">rgb(45, 127, 249)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #18bfff;"><span class="color-name">cyanBright</span><span class="hex-value">#18bfff</span><span class="rgb-value">rgb(24, 191, 255)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #20d9d2;"><span class="color-name">tealBright</span><span class="hex-value">#20d9d2</span><span class="rgb-value">rgb(32, 217, 210)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #20c933;"><span class="color-name">greenBright</span><span class="hex-value">#20c933</span><span class="rgb-value">rgb(32, 201, 51)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #fcb400;"><span class="color-name">yellowBright</span><span class="hex-value">#fcb400</span><span class="rgb-value">rgb(252, 180, 0)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #ff6f2c;"><span class="color-name">orangeBright</span><span class="hex-value">#ff6f2c</span><span class="rgb-value">rgb(255, 111, 44)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #f82b60;"><span class="color-name">redBright</span><span class="hex-value">#f82b60</span><span class="rgb-value">rgb(248, 43, 96)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #ff08c2;"><span class="color-name">pinkBright</span><span class="hex-value">#ff08c2</span><span class="rgb-value">rgb(255, 8, 194)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #8b46ff;"><span class="color-name">purpleBright</span><span class="hex-value">#8b46ff</span><span class="rgb-value">rgb(139, 70, 255)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #666666;"><span class="color-name">grayBright</span><span class="hex-value">#666666</span><span class="rgb-value">rgb(102, 102, 102)</span></div>
+            </td>
+        </tr>
+        <!-- Dark 1 Row -->
+        <tr>
+            <td>Dark 1</td>
+            <td>
+                <div class="color-swatch" style="background-color: #2750ae;"><span class="color-name">blueDark1</span><span class="hex-value">#2750ae</span><span class="rgb-value">rgb(39, 80, 174)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #0b76b7;"><span class="color-name">cyanDark1</span><span class="hex-value">#0b76b7</span><span class="rgb-value">rgb(11, 118, 183)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #06a09b;"><span class="color-name">tealDark1</span><span class="hex-value">#06a09b</span><span class="rgb-value">rgb(6, 160, 155)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #338a17;"><span class="color-name">greenDark1</span><span class="hex-value">#338a17</span><span class="rgb-value">rgb(51, 138, 23)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #b87503;"><span class="color-name">yellowDark1</span><span class="hex-value">#b87503</span><span class="rgb-value">rgb(184, 117, 3)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #d74d26;"><span class="color-name">orangeDark1</span><span class="hex-value">#d74d26</span><span class="rgb-value">rgb(215, 77, 38)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #ba1e45;"><span class="color-name">redDark1</span><span class="hex-value">#ba1e45</span><span class="rgb-value">rgb(186, 30, 69)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #b2158b;"><span class="color-name">pinkDark1</span><span class="hex-value">#b2158b</span><span class="rgb-value">rgb(178, 21, 139)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #6b1cb0;"><span class="color-name">purpleDark1</span><span class="hex-value">#6b1cb0</span><span class="rgb-value">rgb(107, 28, 176)</span></div>
+            </td>
+            <td>
+                <div class="color-swatch" style="background-color: #444444;"><span class="color-name">grayDark1</span><span class="hex-value">#444444</span><span class="rgb-value">rgb(68, 68, 68)</span></div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- JavaScript for Toggles -->
+<script>
+    const toggleHexCheckbox = document.getElementById('toggleHex');
+    const toggleRgbCheckbox = document.getElementById('toggleRgb');
+    const toggleTableHeadersCheckbox = document.getElementById('toggleTableHeaders');
+    const toggleColorNamesCheckbox = document.getElementById('toggleColorNames'); // Get the new checkbox
+    const bodyElement = document.body;
+
+    // --- Set initial toggle states based on body classes ---
+    toggleHexCheckbox.checked = bodyElement.classList.contains('show-hex');
+    toggleRgbCheckbox.checked = bodyElement.classList.contains('show-rgb');
+    toggleTableHeadersCheckbox.checked = !bodyElement.classList.contains('hide-table-headers'); // Inverted logic for 'hide' class
+    toggleColorNamesCheckbox.checked = !bodyElement.classList.contains('hide-color-names'); // Inverted logic for 'hide' class
+    // -------------------------------------------------------
+
+    // --- Add event listeners ---
+    toggleHexCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+            bodyElement.classList.add('show-hex');
+        } else {
+            bodyElement.classList.remove('show-hex');
+        }
+    });
+
+    toggleRgbCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+            bodyElement.classList.add('show-rgb');
+        } else {
+            bodyElement.classList.remove('show-rgb');
+        }
+    });
+
+    toggleTableHeadersCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+            bodyElement.classList.remove('hide-table-headers'); // Remove class to show
+        } else {
+            bodyElement.classList.add('hide-table-headers'); // Add class to hide
+        }
+    });
+
+    toggleColorNamesCheckbox.addEventListener('change', function() { // Add listener for the new checkbox
+        if (this.checked) {
+            bodyElement.classList.remove('hide-color-names'); // Remove class to show
+        } else {
+            bodyElement.classList.add('hide-color-names'); // Add class to hide
+        }
+    });
+</script>
+
+</body>
+</html>
